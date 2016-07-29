@@ -62,6 +62,9 @@
                                 <state key="normal" title="Login">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="loginToUdacity:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DJW-It-G3n"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zkp-8g-fFL">
                                 <rect key="frame" x="159" y="352" width="204" height="23"/>
@@ -100,6 +103,10 @@
                             <constraint firstItem="zkp-8g-fFL" firstAttribute="leading" secondItem="M0K-GA-QCw" secondAttribute="leading" id="zG2-f6-vhz"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="passWordTextField" destination="b0y-oc-x1D" id="TsA-VZ-ZYt"/>
+                        <outlet property="usernameTextField" destination="p73-39-22F" id="fxk-jy-LE2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

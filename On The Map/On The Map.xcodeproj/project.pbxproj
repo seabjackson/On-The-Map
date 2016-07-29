@@ -14,6 +14,8 @@
 		2A0471FE1D49674E00DB727B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2A0471FC1D49674E00DB727B /* LaunchScreen.storyboard */; };
 		2A0472091D49674E00DB727B /* On_The_MapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0472081D49674E00DB727B /* On_The_MapTests.swift */; };
 		2A0472141D49674E00DB727B /* On_The_MapUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0472131D49674E00DB727B /* On_The_MapUITests.swift */; };
+		2AE41D8A1D4A953C003D3CCD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE41D891D4A953C003D3CCD /* Constants.swift */; };
+		2AE41D8C1D4BB48C003D3CCD /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE41D8B1D4BB48C003D3CCD /* GCDBlackBox.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		2A04720F1D49674E00DB727B /* On The MapUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "On The MapUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A0472131D49674E00DB727B /* On_The_MapUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = On_The_MapUITests.swift; sourceTree = "<group>"; };
 		2A0472151D49674E00DB727B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2AE41D891D4A953C003D3CCD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		2AE41D8B1D4BB48C003D3CCD /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 				2A0471F31D49674E00DB727B /* AppDelegate.swift */,
 				2A0471F51D49674E00DB727B /* LoginViewController.swift */,
 				2A0471F71D49674E00DB727B /* Main.storyboard */,
+				2AE41D891D4A953C003D3CCD /* Constants.swift */,
+				2AE41D8B1D4BB48C003D3CCD /* GCDBlackBox.swift */,
 				2A0471FA1D49674E00DB727B /* Assets.xcassets */,
 				2A0471FC1D49674E00DB727B /* LaunchScreen.storyboard */,
 				2A0471FF1D49674E00DB727B /* Info.plist */,
@@ -259,8 +265,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AE41D8C1D4BB48C003D3CCD /* GCDBlackBox.swift in Sources */,
 				2A0471F61D49674E00DB727B /* LoginViewController.swift in Sources */,
 				2A0471F41D49674E00DB727B /* AppDelegate.swift in Sources */,
+				2AE41D8A1D4A953C003D3CCD /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -485,6 +493,7 @@
 				2A04721A1D49674E00DB727B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2A04721B1D49674E00DB727B /* Build configuration list for PBXNativeTarget "On The MapTests" */ = {
 			isa = XCConfigurationList;
@@ -493,6 +502,7 @@
 				2A04721D1D49674E00DB727B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2A04721E1D49674E00DB727B /* Build configuration list for PBXNativeTarget "On The MapUITests" */ = {
 			isa = XCConfigurationList;
@@ -501,6 +511,7 @@
 				2A0472201D49674E00DB727B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
