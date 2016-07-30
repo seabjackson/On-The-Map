@@ -20,23 +20,11 @@ class LoginViewController: UIViewController {
     
 
     @IBAction func loginToUdacity(sender: UIButton) {
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
-        request.HTTPMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"udacity\": {\"username\": \"\(usernameTextField.text)\", \"password\": \"\(passWordTextField.text)\"}}".dataUsingEncoding(NSUTF8StringEncoding)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { (data, response, error) in
-            if error != nil {
-                print(error)
-                return
+        UdacityAPIHandling.sharedInstance.getSessionID(usernameTextField.text!, password: passWordTextField.text!) { (success, error) in
+            if success {
+                print("got the session id")
             }
-            let newData = data?.subdataWithRange(NSMakeRange(5, (data?.length)! - 5)) // subset response data
-            
-            print(newData)
         }
-        task.resume()
-
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
