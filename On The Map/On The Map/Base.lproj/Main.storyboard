@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -161,13 +162,27 @@
                     <view key="view" contentMode="scaleToFill" id="zYe-oC-bMd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="epc-Dq-CBB">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="epc-Dq-CBB" firstAttribute="leading" secondItem="zYe-oC-bMd" secondAttribute="leadingMargin" constant="-20" id="Hes-NT-pko"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="epc-Dq-CBB" secondAttribute="trailing" constant="-20" id="cc9-vF-rF4"/>
+                            <constraint firstItem="epc-Dq-CBB" firstAttribute="top" secondItem="zYe-oC-bMd" secondAttribute="topMargin" id="hCQ-Lr-BMr"/>
+                            <constraint firstItem="epc-Dq-CBB" firstAttribute="bottom" secondItem="zYe-oC-bMd" secondAttribute="bottomMargin" id="iVp-OF-Wmw"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="On The Map" id="zUY-Js-eLt"/>
+                    <connections>
+                        <outlet property="mapView" destination="epc-Dq-CBB" id="Qvo-5i-lzV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3kZ-Dd-QKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1235" y="2"/>
+            <point key="canvasLocation" x="1235" y="-14"/>
         </scene>
         <!--Table-->
         <scene sceneID="Fpa-EI-cQ3">

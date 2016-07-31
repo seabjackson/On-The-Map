@@ -26,9 +26,7 @@ class LoginViewController: UIViewController {
                     print("got the session id")
                     let controller = self.storyboard?.instantiateViewControllerWithIdentifier("ManageTabBarView") as! UITabBarController
                     self.presentViewController(controller, animated: true, completion: nil)
-                } else {
-                    
-)                }
+                }
             }
         }
     }
