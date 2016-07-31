@@ -21,8 +21,14 @@ class LoginViewController: UIViewController {
 
     @IBAction func loginToUdacity(sender: UIButton) {
         UdacityAPIHandling.sharedInstance.getSessionID(usernameTextField.text!, password: passWordTextField.text!) { (success, error) in
-            if success {
-                print("got the session id")
+            performUIUpdatesOnMain {
+                if success {
+                    print("got the session id")
+                    let controller = self.storyboard?.instantiateViewControllerWithIdentifier("ManageTabBarView") as! UITabBarController
+                    self.presentViewController(controller, animated: true, completion: nil)
+                } else {
+                    
+)                }
             }
         }
     }

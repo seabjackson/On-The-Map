@@ -118,7 +118,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="Oz6-uU-2cN">
             <objects>
-                <tabBarController id="Pww-Zx-Jm9" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="ManageTabBarView" id="Pww-Zx-Jm9" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="OKZ-7t-huh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -150,7 +150,7 @@
             </objects>
             <point key="canvasLocation" x="469" y="-14"/>
         </scene>
-        <!--Map View Controller-->
+        <!--On The Map-->
         <scene sceneID="nxA-GR-b8L">
             <objects>
                 <viewController id="CKH-OQ-Yqo" customClass="MapViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
@@ -163,7 +163,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="zUY-Js-eLt"/>
+                    <navigationItem key="navigationItem" title="On The Map" id="zUY-Js-eLt"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3kZ-Dd-QKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
