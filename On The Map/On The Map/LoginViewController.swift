@@ -26,6 +26,11 @@ class LoginViewController: UIViewController {
                     print("got the session id")
                     let controller = self.storyboard?.instantiateViewControllerWithIdentifier("ManageTabBarView") as! UITabBarController
                     self.presentViewController(controller, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: "Login Failed", message: "Invalid username/password", preferredStyle: .Alert)
+                    let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    alert.addAction(action)
+                    self.presentViewController(alert, animated: true, completion: nil)
                 }
             }
         }
