@@ -20,32 +20,9 @@ struct Constants {
         static let ApiPath = "/api/session"
     }
     
-//    // MARK: TMDB Parameter Keys
-//    struct TMDBParameterKeys {
-//        static let ApiKey = "api_key"
-//        static let RequestToken = "request_token"
-//        static let SessionID = "session_id"
-//        static let Username = "username"
-//        static let Password = "password"
-//    }
-    
-//    // MARK: TMDB Parameter Values
-//    struct TMDBParameterValues {
-//        static let ApiKey = "YOUR_API_KEY_HERE"
-//    }
-//    
-//    // MARK: TMDB Response Keys
-//    struct TMDBResponseKeys {
-//        static let Title = "title"
-//        static let ID = "id"
-//        static let PosterPath = "poster_path"
-//        static let StatusCode = "status_code"
-//        static let StatusMessage = "status_message"
-//        static let SessionID = "session_id"
-//        static let RequestToken = "request_token"
-//        static let Success = "success"
-//        static let UserID = "id"
-//        static let Results = "results"
-//    }
+    struct ParseAPI {
+        static let restAPIKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
+        static let parseAPPID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
+    }
 
 }

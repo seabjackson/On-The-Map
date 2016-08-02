@@ -17,6 +17,11 @@
 		2A2AEF771D4C381B00A34A79 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2AEF761D4C381B00A34A79 /* MapViewController.swift */; };
 		2A2AEF791D4C396400A34A79 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2AEF781D4C396400A34A79 /* TableViewController.swift */; };
 		2A2AEF7B1D4C6A3300A34A79 /* UdacityUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2AEF7A1D4C6A3300A34A79 /* UdacityUser.swift */; };
+		2A76BBA01D4FC78A0078E807 /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A76BB9F1D4FC78A0078E807 /* StudentLocation.swift */; };
+		2A76BBA21D4FCAD10078E807 /* ParseAPIHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A76BBA11D4FCAD10078E807 /* ParseAPIHandling.swift */; };
+		2A76BBA61D5021F00078E807 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A76BBA31D5021F00078E807 /* FBSDKCoreKit.framework */; };
+		2A76BBA71D5021F00078E807 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A76BBA41D5021F00078E807 /* FBSDKLoginKit.framework */; };
+		2A76BBA81D5021F00078E807 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A76BBA51D5021F00078E807 /* FBSDKShareKit.framework */; };
 		2AE41D8A1D4A953C003D3CCD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE41D891D4A953C003D3CCD /* Constants.swift */; };
 		2AE41D8C1D4BB48C003D3CCD /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE41D8B1D4BB48C003D3CCD /* GCDBlackBox.swift */; };
 		2AE41D8E1D4BB902003D3CCD /* UdacityAPIHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE41D8D1D4BB902003D3CCD /* UdacityAPIHandling.swift */; };
@@ -56,6 +61,11 @@
 		2A2AEF761D4C381B00A34A79 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2A2AEF781D4C396400A34A79 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		2A2AEF7A1D4C6A3300A34A79 /* UdacityUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityUser.swift; sourceTree = "<group>"; };
+		2A76BB9F1D4FC78A0078E807 /* StudentLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
+		2A76BBA11D4FCAD10078E807 /* ParseAPIHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAPIHandling.swift; sourceTree = "<group>"; };
+		2A76BBA31D5021F00078E807 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../../Documents/FacebookSDK/FacebookSDKs-iOS-4.14.0/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		2A76BBA41D5021F00078E807 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../../Documents/FacebookSDK/FacebookSDKs-iOS-4.14.0/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		2A76BBA51D5021F00078E807 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../../../../Documents/FacebookSDK/FacebookSDKs-iOS-4.14.0/FBSDKShareKit.framework"; sourceTree = "<group>"; };
 		2AE41D891D4A953C003D3CCD /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2AE41D8B1D4BB48C003D3CCD /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		2AE41D8D1D4BB902003D3CCD /* UdacityAPIHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityAPIHandling.swift; sourceTree = "<group>"; };
@@ -66,6 +76,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A76BBA61D5021F00078E807 /* FBSDKCoreKit.framework in Frameworks */,
+				2A76BBA71D5021F00078E807 /* FBSDKLoginKit.framework in Frameworks */,
+				2A76BBA81D5021F00078E807 /* FBSDKShareKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +102,9 @@
 		2A0471E71D49674D00DB727B = {
 			isa = PBXGroup;
 			children = (
+				2A76BBA31D5021F00078E807 /* FBSDKCoreKit.framework */,
+				2A76BBA41D5021F00078E807 /* FBSDKLoginKit.framework */,
+				2A76BBA51D5021F00078E807 /* FBSDKShareKit.framework */,
 				2A0471F21D49674E00DB727B /* On The Map */,
 				2A0472071D49674E00DB727B /* On The MapTests */,
 				2A0472121D49674E00DB727B /* On The MapUITests */,
@@ -112,7 +128,9 @@
 				2A0471F31D49674E00DB727B /* AppDelegate.swift */,
 				2A0471F51D49674E00DB727B /* LoginViewController.swift */,
 				2AE41D8D1D4BB902003D3CCD /* UdacityAPIHandling.swift */,
+				2A76BBA11D4FCAD10078E807 /* ParseAPIHandling.swift */,
 				2A2AEF7A1D4C6A3300A34A79 /* UdacityUser.swift */,
+				2A76BB9F1D4FC78A0078E807 /* StudentLocation.swift */,
 				2A0471F71D49674E00DB727B /* Main.storyboard */,
 				2A2AEF781D4C396400A34A79 /* TableViewController.swift */,
 				2A2AEF761D4C381B00A34A79 /* MapViewController.swift */,
@@ -277,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A76BBA01D4FC78A0078E807 /* StudentLocation.swift in Sources */,
 				2AE41D8C1D4BB48C003D3CCD /* GCDBlackBox.swift in Sources */,
 				2A2AEF791D4C396400A34A79 /* TableViewController.swift in Sources */,
 				2A2AEF771D4C381B00A34A79 /* MapViewController.swift in Sources */,
@@ -285,6 +304,7 @@
 				2A0471F41D49674E00DB727B /* AppDelegate.swift in Sources */,
 				2A2AEF7B1D4C6A3300A34A79 /* UdacityUser.swift in Sources */,
 				2AE41D8A1D4A953C003D3CCD /* Constants.swift in Sources */,
+				2A76BBA21D4FCAD10078E807 /* ParseAPIHandling.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
