@@ -18,7 +18,7 @@ extension ParseClient {
                 print(error)
                 completionHandlerForStudentLocation(success: false, studentLocation: nil, error: error)
             } else {
-                
+                print(results)
             }
         }
     }

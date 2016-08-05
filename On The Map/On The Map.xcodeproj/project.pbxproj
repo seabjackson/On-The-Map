@@ -23,7 +23,6 @@
 		2A2FC6E81D5479E40066D568 /* ParseConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2FC6E71D5479E40066D568 /* ParseConvenience.swift */; };
 		2A61D6DF1D5412F2001BB629 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A61D6DE1D5412F2001BB629 /* ParseClient.swift */; };
 		2A76BBA01D4FC78A0078E807 /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A76BB9F1D4FC78A0078E807 /* StudentLocation.swift */; };
-		2A76BBA21D4FCAD10078E807 /* ParseAPIHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A76BBA11D4FCAD10078E807 /* ParseAPIHandling.swift */; };
 		2AE41D8A1D4A953C003D3CCD /* UdacityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE41D891D4A953C003D3CCD /* UdacityConstants.swift */; };
 		2AE41D8C1D4BB48C003D3CCD /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE41D8B1D4BB48C003D3CCD /* GCDBlackBox.swift */; };
 /* End PBXBuildFile section */
@@ -68,7 +67,6 @@
 		2A2FC6E71D5479E40066D568 /* ParseConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConvenience.swift; sourceTree = "<group>"; };
 		2A61D6DE1D5412F2001BB629 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		2A76BB9F1D4FC78A0078E807 /* StudentLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
-		2A76BBA11D4FCAD10078E807 /* ParseAPIHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseAPIHandling.swift; sourceTree = "<group>"; };
 		2AE41D891D4A953C003D3CCD /* UdacityConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConstants.swift; sourceTree = "<group>"; };
 		2AE41D8B1D4BB48C003D3CCD /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -184,7 +182,6 @@
 		2A61D6DD1D5410F7001BB629 /* ParseAPI */ = {
 			isa = PBXGroup;
 			children = (
-				2A76BBA11D4FCAD10078E807 /* ParseAPIHandling.swift */,
 				2A2FC6E51D5464E90066D568 /* ParseConstants.swift */,
 				2A76BB9F1D4FC78A0078E807 /* StudentLocation.swift */,
 				2A61D6DE1D5412F2001BB629 /* ParseClient.swift */,
@@ -339,7 +336,6 @@
 				2A2FC6E61D5464E90066D568 /* ParseConstants.swift in Sources */,
 				2A2AEF7B1D4C6A3300A34A79 /* UdacityUser.swift in Sources */,
 				2AE41D8A1D4A953C003D3CCD /* UdacityConstants.swift in Sources */,
-				2A76BBA21D4FCAD10078E807 /* ParseAPIHandling.swift in Sources */,
 				2A0D96301D51C12F00195ADE /* UdacityConvenience.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
