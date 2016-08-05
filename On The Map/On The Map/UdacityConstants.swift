@@ -35,12 +35,7 @@ extension UdacityClient {
             struct Methods {
                 static let AuthenticationSession = "/session"
             }
-            
-//            
-//            struct ParseAPI {
-//                static let restAPIKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
-//                static let parseAPPID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
-//            }
+        
         
         // MARK: JSON Response Keys
         struct JSONResponseKeys {
@@ -50,7 +45,6 @@ extension UdacityClient {
             static let StatusCode = "status_code"
             
             // MARK: Authorization
-            static let RequestToken = "request_token"
             static let SessionID = "id"
             
             // MARK: Account

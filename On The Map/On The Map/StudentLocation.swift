@@ -18,7 +18,6 @@ struct StudentLocation {
     let mediaURL: String?
     let latitude: Double?
     let longitude: Double?
-    
 }
 
 struct StudentLocations {

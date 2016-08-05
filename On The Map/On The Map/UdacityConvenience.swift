@@ -18,18 +18,6 @@ extension UdacityClient {
                     print(error)
                     completionHandlerForSession(success: false, sessionID: nil, errorString: "Login Failed (Session ID)")
                 } else {
-                    // check for an account
-                    guard let account = results["account"] as? [String: AnyObject] else {
-                        print("account error")
-                        return
-                    }
-        
-                    // is the account registered
-                    guard let registered = account["registered"] as? Bool where registered == true else {
-                        print("registered error")
-                        return
-                    }
-                    
                     guard let sessionObject = results["session"] as? [String: AnyObject] else {
                         print("sessionObject error")
                         return
