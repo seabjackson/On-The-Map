@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
     
 
     @IBAction func loginToUdacity(sender: UIButton) {
-        UdacityAPIHandling.sharedInstance.getSessionID(usernameTextField.text!, password: passWordTextField.text!) { (success, error) in
+        UdacityClient.sharedInstance().getSessionID(usernameTextField.text!, password: passWordTextField.text!) { (success, sessionID, errorString) in
             performUIUpdatesOnMain {
                 if success {
                     print("got the session id")
@@ -35,12 +35,8 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
+
+
 
 

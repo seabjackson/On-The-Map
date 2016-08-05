@@ -16,9 +16,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        ParseAPIHandling.sharedInstance.getStudentLocation() { (success, error) in
-            
-        }
+//        ParseAPIHandling.sharedInstance.getStudentLocation() { (success, error) in
+//            
+//        }
 
         // Do any additional setup after loading the view.
     }
