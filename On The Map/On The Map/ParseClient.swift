@@ -8,14 +8,9 @@
 
 import Foundation
 
-class ParseClient: NSObject {
+class ParseClient {
     
     var session = NSURLSession.sharedSession()
-    
-    // MARK: Initializers
-    override init() {
-        super.init()
-    }
     
     // MARK: GET
     

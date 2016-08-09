@@ -10,17 +10,17 @@ import Foundation
 
 struct StudentLocation {
     
-    let objectId: String?
-    let uniqueKey: String?
-    let firstName: String?
-    let lastName: String?
-    let mapString: String?
-    let mediaURL: String?
-    let latitude: Double?
-    let longitude: Double?
+    var objectId: String?
+    var uniqueKey: String?
+    var firstName: String?
+    var lastName: String?
+    var mapString: String?
+    var mediaURL: String?
+    var latitude: Double?
+    var longitude: Double?
 }
 
 struct StudentLocations {
     var sharedLocations = [StudentLocation]()
-    static let sharedInstance = StudentLocations()
+    static var sharedInstance = StudentLocations()
 }

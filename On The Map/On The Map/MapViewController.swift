@@ -12,13 +12,89 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-    
+    let studentLocations = StudentLocations()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        ParseClient.sharedInstance().getStudentLocation() { (success, studentLocation, error) in
-            print("got the info")
+        mapView.delegate = self
+        print("map view loaded")
+        var annotations = [MKPointAnnotation]()
+        
+        ParseClient.sharedInstance().getStudentLocation() { (success, studentLocations, error) in
+            performUIUpdatesOnMain {
+                if let error = error {
+                    print("An error occurred \(error)")
+                }
+                
+                if success {
+                    print("got the locations yeahh")
+                    for dictionary in studentLocations! {
+                        let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
+                        let long = CLLocationDegrees(dictionary["longitude"] as! Double)
+                        
+                        // create the CLLocationCoordinates2D with lat and long
+                        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                        
+                        let first = dictionary["firstName"] as! String
+                        let last = dictionary["lastName"] as! String
+                        let mediaURL = dictionary["mediaURL"] as! String
+                        
+                        let annotation = MKPointAnnotation()
+                        annotation.coordinate = coordinate
+                        annotation.title = "\(first) \(last)"
+                        annotation.subtitle = mediaURL
+                        
+                        annotations.append(annotation)
+                        
+                    }
+                    self.mapView.addAnnotations(annotations)
+                }
+            }
         }
-
     }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinTintColor = UIColor.redColor()
+            pinView!.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+        } else {
+            pinView!.annotation = annotation
+        }
+        
+        return pinView
+    }
+    
+    
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            let app = UIApplication.sharedApplication()
+            if let toOpen = view.annotation?.subtitle! {
+                // safely open the url
+                if let urlString = NSURL(string: toOpen) {
+                    app.openURL(urlString)
+                }
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

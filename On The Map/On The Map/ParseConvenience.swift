@@ -10,7 +10,7 @@ import Foundation
 
 extension ParseClient {
     
-    func getStudentLocation(completionHandlerForStudentLocation: (success: Bool, studentLocation: [StudentLocation]?, error: NSError?) -> Void) {
+    func getStudentLocation(completionHandlerForStudentLocation: (success: Bool, studentLocation: [[String: AnyObject]]?, error: NSError?) -> Void) {
         
         let parameters = [String: AnyObject]()
         taskForGETMethod(Methods.StudentLocation, parameters: parameters) { (results, error) in
@@ -18,7 +18,31 @@ extension ParseClient {
                 print(error)
                 completionHandlerForStudentLocation(success: false, studentLocation: nil, error: error)
             } else {
-                print(results)
+                guard let locations = results["results"] as? [[String: AnyObject]] else {
+                   completionHandlerForStudentLocation(success: false, studentLocation: nil, error: error)
+                    print("didn't get the results am looking for")
+                    return
+                }
+                completionHandlerForStudentLocation(success: true, studentLocation: locations, error: error)
+                
+                
+                // loop through all the student locations
+                for location in locations {
+                    var studentLocation = StudentLocation()
+                    studentLocation.firstName = location["firstName"] as? String
+                    studentLocation.lastName = location["lastName"] as? String
+                    studentLocation.latitude = location["latitude"] as? Double
+                    studentLocation.longitude = location["longitude"] as? Double
+                    studentLocation.mapString = location["mapString"] as? String
+                    studentLocation.mediaURL = location["mediaURL"] as? String
+                    studentLocation.objectId = location["objectId"] as? String
+                    studentLocation.uniqueKey = location["uniqueKey"] as? String
+                    
+                    // load up the student location array
+                    StudentLocations.sharedInstance.sharedLocations.append(studentLocation)
+                    
+                }
+                
             }
         }
     }
