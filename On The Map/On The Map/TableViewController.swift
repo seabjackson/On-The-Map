@@ -25,18 +25,25 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return StudentLocations.sharedInstance.sharedLocations.count
+        return sharedLocations.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
-        if let firstName = StudentLocations.sharedInstance.sharedLocations[indexPath.row].firstName,
-        lastName = StudentLocations.sharedInstance.sharedLocations[indexPath.row].lastName {
+        if let firstName = sharedLocations[indexPath.row].firstName,lastName = sharedLocations[indexPath.row].lastName {
             cell.textLabel?.text = "\(firstName) \(lastName)"
             cell.imageView!.image = UIImage(named: "pin")
         }
         return cell
+    }
+//    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let app = UIApplication.sharedApplication()
+        if let url = NSURL(string: sharedLocations[indexPath.row].mediaURL!) {
+            app.openURL(url)
+        }
+        
     }
     
 

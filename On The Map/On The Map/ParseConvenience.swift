@@ -23,7 +23,7 @@ extension ParseClient {
                     print("didn't get the results am looking for")
                     return
                 }
-                completionHandlerForStudentLocation(success: true, error: error)
+                completionHandlerForStudentLocation(success: true, error: nil)
                 
                 
                 // loop through all the student locations
@@ -39,7 +39,7 @@ extension ParseClient {
                     studentLocation.uniqueKey = location["uniqueKey"] as? String
                     
                     // load up the student location array
-                    StudentLocations.sharedInstance.sharedLocations.append(studentLocation)
+                    sharedLocations.append(studentLocation)
                     
                 }
                 

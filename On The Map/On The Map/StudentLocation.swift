@@ -8,6 +8,8 @@
 
 import Foundation
 
+var sharedLocations = [StudentLocation]()
+
 struct StudentLocation {
     
     var objectId: String?
@@ -20,7 +22,6 @@ struct StudentLocation {
     var longitude: Double?
 }
 
-struct StudentLocations {
-    var sharedLocations = [StudentLocation]()
-    static var sharedInstance = StudentLocations()
-}
+
+
+

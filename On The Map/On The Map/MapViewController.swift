@@ -12,7 +12,6 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
-    let studentLocations = StudentLocations()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +27,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 
                 if success {
                     print("got the locations yeahh")
-                    let studentLocationsArray = StudentLocations.sharedInstance.sharedLocations
-                    for dictionary in studentLocationsArray {
+                    for dictionary in sharedLocations {
                         let lat = CLLocationDegrees(dictionary.latitude!)
                         let long = CLLocationDegrees(dictionary.longitude!)
                         
