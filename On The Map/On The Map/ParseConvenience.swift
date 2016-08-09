@@ -10,20 +10,20 @@ import Foundation
 
 extension ParseClient {
     
-    func getStudentLocation(completionHandlerForStudentLocation: (success: Bool, studentLocation: [[String: AnyObject]]?, error: NSError?) -> Void) {
+    func getStudentLocation(completionHandlerForStudentLocation: (success: Bool, error: NSError?) -> Void) {
         
         let parameters = [String: AnyObject]()
         taskForGETMethod(Methods.StudentLocation, parameters: parameters) { (results, error) in
             if let error = error {
                 print(error)
-                completionHandlerForStudentLocation(success: false, studentLocation: nil, error: error)
+                completionHandlerForStudentLocation(success: false, error: error)
             } else {
                 guard let locations = results["results"] as? [[String: AnyObject]] else {
-                   completionHandlerForStudentLocation(success: false, studentLocation: nil, error: error)
+                   completionHandlerForStudentLocation(success: false, error: error)
                     print("didn't get the results am looking for")
                     return
                 }
-                completionHandlerForStudentLocation(success: true, studentLocation: locations, error: error)
+                completionHandlerForStudentLocation(success: true, error: error)
                 
                 
                 // loop through all the student locations

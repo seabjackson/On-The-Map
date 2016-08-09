@@ -129,11 +129,11 @@
             </objects>
             <point key="canvasLocation" x="-744" y="206"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--On The Map-->
         <scene sceneID="Oz6-uU-2cN">
             <objects>
                 <tabBarController storyboardIdentifier="ManageTabBarView" id="Pww-Zx-Jm9" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Ip2-Cb-qdl"/>
+                    <navigationItem key="navigationItem" title="On The Map" id="Ip2-Cb-qdl"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="OKZ-7t-huh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

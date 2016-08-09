@@ -30,12 +30,12 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        let studentDictionaryArray = StudentLocations.sharedInstance.sharedLocations[indexPath.row]
-        let firstName = studentDictionaryArray.firstName! as String
-        let lastName = studentDictionaryArray.lastName! as String
-        cell.textLabel?.text = "\(firstName) \(lastName)"
-        cell.detailTextLabel?.text = "\(studentDictionaryArray.mapString)"
-        cell.imageView!.image = UIImage(named: "pin")
+        
+        if let firstName = StudentLocations.sharedInstance.sharedLocations[indexPath.row].firstName,
+        lastName = StudentLocations.sharedInstance.sharedLocations[indexPath.row].lastName {
+            cell.textLabel?.text = "\(firstName) \(lastName)"
+            cell.imageView!.image = UIImage(named: "pin")
+        }
         return cell
     }
     

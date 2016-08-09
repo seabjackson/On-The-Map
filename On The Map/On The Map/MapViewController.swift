@@ -20,7 +20,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         print("map view loaded")
         var annotations = [MKPointAnnotation]()
         
-        ParseClient.sharedInstance().getStudentLocation() { (success, studentLocations, error) in
+        ParseClient.sharedInstance().getStudentLocation() { (success, error) in
             performUIUpdatesOnMain {
                 if let error = error {
                     print("An error occurred \(error)")
@@ -28,16 +28,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 
                 if success {
                     print("got the locations yeahh")
-                    for dictionary in studentLocations! {
-                        let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
-                        let long = CLLocationDegrees(dictionary["longitude"] as! Double)
+                    let studentLocationsArray = StudentLocations.sharedInstance.sharedLocations
+                    for dictionary in studentLocationsArray {
+                        let lat = CLLocationDegrees(dictionary.latitude!)
+                        let long = CLLocationDegrees(dictionary.longitude!)
                         
                         // create the CLLocationCoordinates2D with lat and long
                         let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
                         
-                        let first = dictionary["firstName"] as! String
-                        let last = dictionary["lastName"] as! String
-                        let mediaURL = dictionary["mediaURL"] as! String
+                        let first = dictionary.firstName!
+                        let last = dictionary.lastName!
+                        let mediaURL = dictionary.mediaURL!
                         
                         let annotation = MKPointAnnotation()
                         annotation.coordinate = coordinate
