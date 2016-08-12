@@ -9,7 +9,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginScreen" id="BYZ-38-t0r" customClass="LoginViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -111,7 +111,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1379" y="206"/>
+            <point key="canvasLocation" x="-1363" y="206"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zCt-w4-D3e">
@@ -127,13 +127,20 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="svV-H8-JlS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-744" y="206"/>
+            <point key="canvasLocation" x="-729" y="206"/>
         </scene>
         <!--On The Map-->
         <scene sceneID="Oz6-uU-2cN">
             <objects>
-                <tabBarController storyboardIdentifier="ManageTabBarView" id="Pww-Zx-Jm9" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="On The Map" id="Ip2-Cb-qdl"/>
+                <tabBarController storyboardIdentifier="ManageTabBarView" id="Pww-Zx-Jm9" customClass="MapTabBarViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" title="On The Map" id="Ip2-Cb-qdl">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="6zO-EG-N05">
+                            <connections>
+                                <action selector="logOut:" destination="Pww-Zx-Jm9" id="7Mo-Tg-3fp"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="ZdE-aa-3EF"/>
+                    </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="OKZ-7t-huh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -146,7 +153,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2r2-RT-Ss8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="46" y="206"/>
+            <point key="canvasLocation" x="-76" y="206"/>
         </scene>
         <!--On The Map-->
         <scene sceneID="nxA-GR-b8L">
@@ -183,7 +190,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3kZ-Dd-QKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="731" y="-43"/>
+            <point key="canvasLocation" x="667" y="-133"/>
         </scene>
         <!--On The Map-->
         <scene sceneID="b7n-Q1-bd7">
@@ -232,7 +239,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pvi-MP-3Gy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="765" y="686"/>
+            <point key="canvasLocation" x="667" y="518"/>
         </scene>
     </scenes>
     <resources>

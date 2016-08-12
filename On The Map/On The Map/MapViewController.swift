@@ -28,11 +28,19 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 if success {
                     print("got the locations yeahh")
                     for dictionary in sharedLocations {
-                        let lat = CLLocationDegrees(dictionary.latitude!)
-                        let long = CLLocationDegrees(dictionary.longitude!)
+                        guard let lat = dictionary.latitude else {
+                            print("no lat")
+                            break
+                        }
+                        guard let long = dictionary.longitude else {
+                            print("no long")
+                            break
+                        }
+                        let latitude = CLLocationDegrees(lat)
+                        let longitude = CLLocationDegrees(long)
                         
                         // create the CLLocationCoordinates2D with lat and long
-                        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                         
                         let first = dictionary.firstName!
                         let last = dictionary.lastName!
@@ -51,6 +59,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
         }
     }
+    
+    
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"

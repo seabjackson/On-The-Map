@@ -25,14 +25,17 @@ class UdacityClient: NSObject {
     
     // MARK: GET
     
-    func taskForGETMethod(method: String, jsonBody: String, completionHandlerForGET: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func taskForPOSTMethod(method: String, jsonBody: String?, methodType: String, completionHandlerForGET: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
         // build the url and configure the request
         let request = NSMutableURLRequest(URL: udacityURL(method))
-        request.HTTPMethod = "POST"
+        request.HTTPMethod = methodType
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = jsonBody.dataUsingEncoding(NSUTF8StringEncoding)
+        if let jsonBody = jsonBody {
+           request.HTTPBody = jsonBody.dataUsingEncoding(NSUTF8StringEncoding) 
+        }
+        
 
         // make the request
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
