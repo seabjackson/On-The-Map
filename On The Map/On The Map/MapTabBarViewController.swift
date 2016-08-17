@@ -11,6 +11,19 @@ import UIKit
 class MapTabBarViewController: UITabBarController {
     
     
+    
+    
+    @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
+        if viewControllers![selectedIndex].isKindOfClass(MapViewController) {
+            let controller = selectedViewController as! MapViewController
+            controller.didRefreshMap()
+        } else {
+            let controller = selectedViewController as! TableViewController
+            controller.didRefreshTable()
+        }
+    }
+    
+    
     @IBAction func logOut(sender: UIBarButtonItem) {
         UdacityClient.sharedInstance().deleteSessionID() {(success, error) in
             if success {
@@ -20,12 +33,6 @@ class MapTabBarViewController: UITabBarController {
                 }
             }
         }
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
 }

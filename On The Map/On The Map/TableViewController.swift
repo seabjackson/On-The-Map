@@ -19,9 +19,9 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        tableView.reloadData()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,6 +44,17 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
             app.openURL(url)
         }
         
+    }
+    
+    // refresh the tableView
+    func didRefreshTable() {
+        print("refreshed the table")
+        sharedLocations.removeAll()
+        ParseClient.sharedInstance().getStudentLocation() { (success, error) in
+            performUIUpdatesOnMain() {
+                self.tableView.reloadData()
+            }
+        }
     }
     
 

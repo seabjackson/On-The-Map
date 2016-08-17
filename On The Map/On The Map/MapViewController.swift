@@ -12,12 +12,18 @@ import MapKit
 class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    var annotations = [MKPointAnnotation]()
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        showAnnotationOnMap()
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         print("map view loaded")
-        var annotations = [MKPointAnnotation]()
         
         ParseClient.sharedInstance().getStudentLocation() { (success, error) in
             performUIUpdatesOnMain {
@@ -27,40 +33,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 
                 if success {
                     print("got the locations yeahh")
-                    for dictionary in sharedLocations {
-                        guard let lat = dictionary.latitude else {
-                            print("no lat")
-                            break
-                        }
-                        guard let long = dictionary.longitude else {
-                            print("no long")
-                            break
-                        }
-                        let latitude = CLLocationDegrees(lat)
-                        let longitude = CLLocationDegrees(long)
-                        
-                        // create the CLLocationCoordinates2D with lat and long
-                        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                        
-                        let first = dictionary.firstName!
-                        let last = dictionary.lastName!
-                        let mediaURL = dictionary.mediaURL!
-                        
-                        let annotation = MKPointAnnotation()
-                        annotation.coordinate = coordinate
-                        annotation.title = "\(first) \(last)"
-                        annotation.subtitle = mediaURL
-                        
-                        annotations.append(annotation)
-                        
-                    }
-                    self.mapView.addAnnotations(annotations)
+                    self.showAnnotationOnMap()
                 }
             }
         }
     }
-    
-    
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseId = "pin"
@@ -91,6 +68,54 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 }
             }
         }
+    }
+    
+    func didRefreshMap() {
+        print("remove annotation")
+        mapView.removeAnnotations(annotations)
+        sharedLocations.removeAll()
+        annotations.removeAll()
+        ParseClient.sharedInstance().getStudentLocation() { (success, error) in
+            performUIUpdatesOnMain() {
+                if (error != nil) {
+                    print("error in getting results")
+                }
+                
+                if success {
+                    self.showAnnotationOnMap()
+                }
+            }
+        }
+    }
+    
+    func showAnnotationOnMap() {
+        for dictionary in sharedLocations {
+            guard let lat = dictionary.latitude else {
+                print("no lat")
+                break
+            }
+            guard let long = dictionary.longitude else {
+                print("no long")
+                break
+            }
+            let latitude = CLLocationDegrees(lat)
+            let longitude = CLLocationDegrees(long)
+            
+            // create the CLLocationCoordinates2D with lat and long
+            let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            
+            let first = dictionary.firstName!
+            let last = dictionary.lastName!
+            let mediaURL = dictionary.mediaURL!
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = "\(first) \(last)"
+            annotation.subtitle = mediaURL
+            
+            annotations.append(annotation)
+        }
+        mapView.addAnnotations(annotations)
     }
     
     
