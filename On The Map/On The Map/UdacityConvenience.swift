@@ -20,6 +20,7 @@ extension UdacityClient {
                         print("sessionObject error")
                         return
                     }
+                    print(results)
                     
                     if let sessionID = sessionObject[Constants.JSONResponseKeys.SessionID] as? String {
                         completionHandlerForSession(success: true, sessionID: sessionID, errorString: nil)
