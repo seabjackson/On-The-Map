@@ -23,9 +23,7 @@ extension ParseClient {
                     print("didn't get the results am looking for")
                     return
                 }
-                completionHandlerForStudentLocation(success: true, error: nil)
-                
-                
+                sharedLocations.removeAll()
                 // loop through all the student locations
                 for location in locations {
                     var studentLocation = StudentLocation()
@@ -40,8 +38,8 @@ extension ParseClient {
                     
                     // load up the student location array
                     sharedLocations.append(studentLocation)
-                    
                 }
+                completionHandlerForStudentLocation(success: true, error: nil)
                 
             }
         }

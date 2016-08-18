@@ -71,10 +71,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func didRefreshMap() {
-        print("remove annotation")
-        mapView.removeAnnotations(annotations)
-        sharedLocations.removeAll()
-        annotations.removeAll()
         ParseClient.sharedInstance().getStudentLocation() { (success, error) in
             performUIUpdatesOnMain() {
                 if (error != nil) {
@@ -82,6 +78,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 }
                 
                 if success {
+                    print("remove annotation")
+                    self.mapView.removeAnnotations(self.annotations)
+                    self.annotations.removeAll()
                     self.showAnnotationOnMap()
                 }
             }

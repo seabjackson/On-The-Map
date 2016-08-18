@@ -48,10 +48,12 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // refresh the tableView
     func didRefreshTable() {
-        print("refreshed the table")
-        sharedLocations.removeAll()
         ParseClient.sharedInstance().getStudentLocation() { (success, error) in
             performUIUpdatesOnMain() {
+                if let error = error {
+                    print("An error occured \(error)")
+                }
+                print("refreshed the table")
                 self.tableView.reloadData()
             }
         }
