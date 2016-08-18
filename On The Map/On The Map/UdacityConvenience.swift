@@ -20,7 +20,29 @@ extension UdacityClient {
                         print("sessionObject error")
                         return
                     }
-                    print(results)
+                    
+                    
+                    guard let accountDict = results["account"] as! NSDictionary? else {
+                        print("NO account dictionary")
+                        return
+                        
+                    }
+                    
+                    guard let registered = accountDict["registered"] as? Int else {
+                        print("Not registered")
+                        return
+                    }
+                    
+                    guard let key = accountDict["key"] as? String else {
+                        print("Key not found")
+                        return
+                    }
+                    
+                    if registered == 1 {
+                        UdacityUser.sharedInstance.key = key
+                        self.getUserInfo()
+                    }
+                    
                     
                     if let sessionID = sessionObject[Constants.JSONResponseKeys.SessionID] as? String {
                         completionHandlerForSession(success: true, sessionID: sessionID, errorString: nil)
@@ -55,7 +77,49 @@ extension UdacityClient {
         task.resume()
     }
     
+    func getUserInfo() {
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/" + UdacityUser.sharedInstance.key!)!)
+        let session = NSURLSession.sharedSession()
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            guard (error == nil) else {
+                print("Connection Error")
+                return
+            }
+                
+            guard let data = data else {
+                print("No data")
+                return
+            }
+            
+            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5))
+            self.convertDataWithCompletionHandler(newData) { (results, error) in
+                guard let accountDict = results["user"] as? NSDictionary else {
+                    print("cannot find the account")
+                    return
+                }
+                
+                if let firstName = accountDict["first_name"] as? String, lastName = accountDict["last_name"] as? String {
+                    UdacityUser.sharedInstance.firstName = firstName
+                    UdacityUser.sharedInstance.lastName = lastName
+                }
+            }
+        }
+        task.resume()
+    }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
 
     
 }

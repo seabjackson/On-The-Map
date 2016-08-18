@@ -62,6 +62,18 @@ class PostingViewController: UIViewController, MKMapViewDelegate {
                     let placemark = placemarks?[0]
                     let location = placemark?.location
                     let coordinate = location?.coordinate
+                    guard let latitude = coordinate!.latitude as? Double else {
+                        print("couldn't find the latitude")
+                        return
+                    }
+                    guard let longitude = coordinate!.longitude as? Double else {
+                        print("couldn't find the longitude")
+                        return
+                    }
+                    
+                    UdacityUser.sharedInstance.latitude = latitude
+                    UdacityUser.sharedInstance.longitude = longitude
+                    
                     print("\nlat: \(coordinate!.latitude), long: \(coordinate!.longitude)")
                     if placemark?.areasOfInterest?.count > 0 {
                         let areaOfInterest = placemark!.areasOfInterest![0]
@@ -81,18 +93,22 @@ class PostingViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func postAStudentLocation(sender: UIButton) {
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://api.parse.com/1/classes/StudentLocation")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
         request.HTTPMethod = "POST"
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"Mountain View, CA\", \"mediaURL\": \"https://udacity.com\",\"latitude\": 37.386052, \"longitude\": -122.083851}".dataUsingEncoding(NSUTF8StringEncoding)
+        request.HTTPBody = "{\"uniqueKey\": \"\(UdacityUser.sharedInstance.key!)\", \"firstName\": \"\(UdacityUser.sharedInstance.firstName!)\", \"lastName\": \"\(UdacityUser.sharedInstance.lastName!)\",\"mapString\": \"\(textField.text!)\", \"mediaURL\": \"\(linkTextField.text!)\",\"latitude\": \(UdacityUser.sharedInstance.latitude!), \"longitude\": \(UdacityUser.sharedInstance.longitude!)}".dataUsingEncoding(NSUTF8StringEncoding)
         let session = NSURLSession.sharedSession()
         let task = session.dataTaskWithRequest(request) { data, response, error in
-            if error != nil { // Handle error…
+            if error != nil {
+                print(error)// Handle error…
                 return
             }
+            print(response)
             print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+            print("I actually posted a location")
+            print("{\"uniqueKey\": \"\(UdacityUser.sharedInstance.key!)\", \"firstName\": \"\(UdacityUser.sharedInstance.firstName!)\", \"lastName\": \"\(UdacityUser.sharedInstance.lastName!)\",\"mapString\": \"\(self.textField.text!)\", \"mediaURL\": \"\(self.linkTextField.text!)\",\"latitude\": \(UdacityUser.sharedInstance.latitude!), \"longitude\": \(UdacityUser.sharedInstance.longitude!)}")
         }
         task.resume()
 

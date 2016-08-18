@@ -9,10 +9,14 @@
 import Foundation
 
 class UdacityUser {
-    var firstName: String? = nil
-    var lastName: String? = nil
-    var sessionID: String? = nil
-    var key: String? = nil
+    var firstName: String?
+    var lastName: String?
+    var sessionID: String?
+    var key: String?
+    var latitude: Double?
+    var longitude: Double?
+    var mediaURL: String?
+    
     
     static let sharedInstance = UdacityUser()
 }
