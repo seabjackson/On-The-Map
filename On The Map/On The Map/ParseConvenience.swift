@@ -13,16 +13,15 @@ extension ParseClient {
     func getStudentLocation(completionHandlerForStudentLocation: (success: Bool, error: NSError?) -> Void) {
         
         let parameters = [String: AnyObject]()
-        taskForGetMethod(Methods.StudentLocation, parameters: parameters) { (results, error) in
+        taskForGetMethod(Constants.Methods.StudentLocation, parameters: parameters) { (results, error) in
             if let error = error {
-                print(error)
                 completionHandlerForStudentLocation(success: false, error: error)
             } else {
                 guard let locations = results["results"] as? [[String: AnyObject]] else {
                    completionHandlerForStudentLocation(success: false, error: error)
-                    print("didn't get the results am looking for")
                     return
                 }
+                // clear out any previous location objects
                 sharedLocations.removeAll()
                 // loop through all the student locations
                 for location in locations {

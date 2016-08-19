@@ -18,12 +18,12 @@ class ParseClient {
         
         /* 1. Set the parameters */
         var parameterWithLimit = parameters
-        parameterWithLimit[ParameterKeys.Limit] = Constants.Limit
+        parameterWithLimit[Constants.ParameterKeys.Limit] = Constants.Limit
         
         /* 2/3. Build the URL, Configure the request */
         let request = NSMutableURLRequest(URL: parseURLFromParameters(parameterWithLimit, withPathExtension: method))
-        request.addValue(ParseAPI.parseAPPID, forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue(ParseAPI.restAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue(Constants.ParseAPI.parseAPPID, forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue(Constants.ParseAPI.restAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         
         /* 4. Make the request */
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
@@ -52,6 +52,8 @@ class ParseClient {
                 return
             }
             
+            
+            
             /* 5/6. Parse the data and use the data (happens in completion handler) */
             self.convertDataWithCompletionHandler(data, completionHandlerForConvertData: completionHandlerForGET)
         }
@@ -62,8 +64,68 @@ class ParseClient {
         return task
     }
     
+    func taskForPOSTMethod(method: String, parameters: [String:AnyObject]?, jsonBody: String?, methodType: String?, completionHandlerForPOST: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+        
+        // build the url and configure the request
+        var URL = NSURL()
+        if let parameters = parameters {
+            URL = parseURLFromParameters(parameters, withPathExtension: method)
+        } else {
+            URL = parseURL(method)
+        }
+        
+        let request = NSMutableURLRequest(URL: URL)
+        
+        
+        if let methodType = methodType {
+            request.HTTPMethod = methodType
+        }
+        
+        if let jsonBody = jsonBody {
+            request.addValue(Constants.ParseAPI.parseAPPID, forHTTPHeaderField: "X-Parse-Application-Id")
+            request.addValue(Constants.ParseAPI.restAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.HTTPBody = jsonBody.dataUsingEncoding(NSUTF8StringEncoding)
+        }
+        
+        // make the request
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            
+            func sendError(error: String) {
+                let userInfo = [NSLocalizedDescriptionKey: error]
+                completionHandlerForPOST(result: nil, error: NSError(domain: "taskForPOSTMethod", code: 1, userInfo: userInfo))
+            }
+            
+            // check for errors
+            guard (error == nil) else {
+                sendError("error with the request")
+                return
+            }
+            
+            // check for successful 2xx response
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                sendError("statusCode other than 2xx returned")
+                return
+            }
+            
+            // check to see if data was returned
+            guard let data = data else {
+                sendError("couldn't parse data")
+                return
+            }
+            
+            // parse the data and use the data
+            self.convertDataWithCompletionHandler(data, completionHandlerForConvertData: completionHandlerForPOST)
+            
+        }
+        task.resume()
+        
+        return task
+    }
+
+
     // given raw JSON, return a usable Foundation object
-    private func convertDataWithCompletionHandler(data: NSData, completionHandlerForConvertData: (result: AnyObject!, error: NSError?) -> Void) {
+     func convertDataWithCompletionHandler(data: NSData, completionHandlerForConvertData: (result: AnyObject!, error: NSError?) -> Void) {
         
         var parsedResult: AnyObject!
         do {
@@ -79,7 +141,7 @@ class ParseClient {
     
     
     // create a URL from parameters
-    private func parseURLFromParameters(parameters: [String:AnyObject], withPathExtension: String? = nil) -> NSURL {
+    func parseURLFromParameters(parameters: [String:AnyObject]?, withPathExtension: String? = nil) -> NSURL {
         
         let components = NSURLComponents()
         components.scheme = ParseClient.Constants.ApiScheme
@@ -87,13 +149,25 @@ class ParseClient {
         components.path = ParseClient.Constants.ApiPath + (withPathExtension ?? "")
         components.queryItems = [NSURLQueryItem]()
         
-        for (key, value) in parameters {
-            let queryItem = NSURLQueryItem(name: key, value: "\(value)")
-            components.queryItems!.append(queryItem)
+        if let parameters = parameters {
+            for (key, value) in parameters {
+                let queryItem = NSURLQueryItem(name: key, value: "\(value)")
+                components.queryItems!.append(queryItem)
+            }
+
         }
-        print(components.URL!)
         return components.URL!
     }
+    
+    func parseURL(withPathExtension: String?) -> NSURL {
+        let components = NSURLComponents()
+        components.scheme = ParseClient.Constants.ApiScheme
+        components.host = ParseClient.Constants.ApiHost
+        components.path = ParseClient.Constants.ApiPath + (withPathExtension ?? "")
+        return components.URL!
+    }
+    
+    
     
     
     // MARK: Shared Instance

@@ -37,7 +37,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         return cell
     }
-//    
+   
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let app = UIApplication.sharedApplication()
         if let url = NSURL(string: sharedLocations[indexPath.row].mediaURL!) {
@@ -58,16 +58,4 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
             }
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -12,50 +12,50 @@ extension UdacityClient {
     func getSessionID(username: String, password: String, completionHandlerForSession: (success: Bool, sessionID: String?, errorString: String?) -> Void) {
             let jsonBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}"
         taskForPOSTMethod(Constants.Methods.AuthenticationSession, jsonBody: jsonBody, methodType: "POST") { (results, error) in
-                if let error = error {
-                    print(error)
-                    completionHandlerForSession(success: false, sessionID: nil, errorString: "Login Failed (Session ID)")
+                if error != nil {
+                    completionHandlerForSession(success: false, sessionID: nil, errorString: "failed network connection")
                 } else {
                     guard let sessionObject = results["session"] as? [String: AnyObject] else {
-                        print("sessionObject error")
+                        completionHandlerForSession(success: false, sessionID: nil, errorString: "invalid username/password")
                         return
                     }
                     
                     
                     guard let accountDict = results["account"] as! NSDictionary? else {
-                        print("NO account dictionary")
+                        completionHandlerForSession(success: false, sessionID: nil, errorString: "invalid account")
                         return
                         
                     }
                     
                     guard let registered = accountDict["registered"] as? Int else {
-                        print("Not registered")
+                        completionHandlerForSession(success: false, sessionID: nil, errorString: "account not registered")
                         return
                     }
                     
                     guard let key = accountDict["key"] as? String else {
-                        print("Key not found")
+                        completionHandlerForSession(success: false, sessionID: nil, errorString: "no account key found")
                         return
                     }
                     
                     if registered == 1 {
                         UdacityUser.sharedInstance.key = key
-                        self.getUserInfo()
+                        self.getUserInfo(key)
                     }
                     
                     
                     if let sessionID = sessionObject[Constants.JSONResponseKeys.SessionID] as? String {
                         completionHandlerForSession(success: true, sessionID: sessionID, errorString: nil)
                     } else {
-                        print("Could not find session id")
-                        completionHandlerForSession(success: false, sessionID: nil, errorString: "Login Failed (Session ID)")
+                        completionHandlerForSession(success: false, sessionID: nil, errorString: "Couldn't find Session ID")
                     }
                 }
             }
     }
     
+    // delete the sessionID for logging out
     func deleteSessionID(completionHandlerForSession: (success: Bool, errorString: String?) -> Void) {
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/session")!)
+        let method = Constants.Methods.AuthenticationSession
+        let request = NSMutableURLRequest(URL: udacityURL(method))
         request.HTTPMethod = "DELETE"
         var xsrfCookie: NSHTTPCookie? = nil
         let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
@@ -70,56 +70,26 @@ extension UdacityClient {
             if error != nil { // Handle error…
                 return
             }
-//            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-//            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
             completionHandlerForSession(success: true, errorString: nil)
         }
         task.resume()
     }
     
-    func getUserInfo() {
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/" + UdacityUser.sharedInstance.key!)!)
-        let session = NSURLSession.sharedSession()
-        let task = session.dataTaskWithRequest(request) { (data, response, error) in
-            guard (error == nil) else {
-                print("Connection Error")
-                return
-            }
-                
-            guard let data = data else {
-                print("No data")
-                return
-            }
-            
-            let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5))
-            self.convertDataWithCompletionHandler(newData) { (results, error) in
+    // get user info with unique key so that we can post a location with the correct udacity profile
+    func getUserInfo(uniqueKey: String) {
+        let uniqueKey = UdacityUser.sharedInstance.key
+        taskForPOSTMethod(Constants.Methods.Users + uniqueKey!, jsonBody: nil, methodType: nil) { (results, error) in
+            if (results != nil) {
                 guard let accountDict = results["user"] as? NSDictionary else {
-                    print("cannot find the account")
                     return
                 }
-                
+                    
                 if let firstName = accountDict["first_name"] as? String, lastName = accountDict["last_name"] as? String {
                     UdacityUser.sharedInstance.firstName = firstName
                     UdacityUser.sharedInstance.lastName = lastName
                 }
             }
         }
-        task.resume()
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
-
-    
 }

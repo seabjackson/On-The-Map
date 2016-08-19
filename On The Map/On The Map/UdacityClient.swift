@@ -25,15 +25,19 @@ class UdacityClient: NSObject {
     
     // MARK: GET
     
-    func taskForPOSTMethod(method: String, jsonBody: String?, methodType: String, completionHandlerForGET: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+    func taskForPOSTMethod(method: String, jsonBody: String?, methodType: String?, completionHandlerForGET: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
         // build the url and configure the request
         let request = NSMutableURLRequest(URL: udacityURL(method))
-        request.HTTPMethod = methodType
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if let methodType = methodType {
+            request.HTTPMethod = methodType
+        }
+        
         if let jsonBody = jsonBody {
-           request.HTTPBody = jsonBody.dataUsingEncoding(NSUTF8StringEncoding) 
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.HTTPBody = jsonBody.dataUsingEncoding(NSUTF8StringEncoding) 
         }
         
 
@@ -78,13 +82,7 @@ class UdacityClient: NSObject {
         return task
     }
     
-    // MARK: POST
     
-//    func taskForPOSTMethod(method: String, parameters: [String:AnyObject], jsonBody: String, completionHandlerForPOST: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
-//        
-//    }
-    
-    // given raw JSON, return a usable Foundation object
     func convertDataWithCompletionHandler(data: NSData, completionHandlerForConvertData: (result: AnyObject!, error: NSError?)  -> Void) {
         var parsedResult: AnyObject!
         do {
@@ -96,12 +94,11 @@ class UdacityClient: NSObject {
         completionHandlerForConvertData(result: parsedResult, error: nil)
     }
     
-    private func udacityURL(withPathExtension: String?) -> NSURL {
+    func udacityURL(withPathExtension: String?) -> NSURL {
         let components = NSURLComponents()
         components.scheme = Constants.Udacity.ApiScheme
         components.host = Constants.Udacity.ApiHost
         components.path = Constants.Udacity.ApiPath + (withPathExtension ?? "")
-        
         return components.URL!
     }
     

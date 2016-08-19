@@ -19,9 +19,9 @@ extension ParseClient {
         static let ApiScheme = "https"
         static let ApiHost = "parse.udacity.com"
         static let ApiPath = "/parse/classes"
-        static let AuthorizationURL = "https://www.udacity.com/account/auth#!/signup"
+        // static let AuthorizationURL = "https://www.udacity.com/account/auth#!/signup"
         static let Limit : String = "100"
-    }
+    
 
 
         struct ParseAPI {
@@ -32,12 +32,12 @@ extension ParseClient {
         // MARK: Parameter Keys
         struct ParameterKeys {
             static let Limit = "limit"
+            static let MethodType = "POST"
         }
         
         // MARL: Methods
         struct Methods {
             static let StudentLocation = "/StudentLocation"
         }
-        
-    
+    }
 }

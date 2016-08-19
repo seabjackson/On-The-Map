@@ -23,6 +23,7 @@ extension UdacityClient {
                 static let ApiHost = "www.udacity.com"
                 static let ApiPath = "/api"
                 static let AuthorizationURL = "https://www.udacity.com/account/auth#!/signup"
+                static let SignUpURL = "https://www.udacity.com/account/auth#!/signup"
             }
             
             // MARK: Parameter Keys
@@ -34,6 +35,7 @@ extension UdacityClient {
             // MARL: Methods
             struct Methods {
                 static let AuthenticationSession = "/session"
+                static let Users = "/users/"
             }
         
         

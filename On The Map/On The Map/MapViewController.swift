@@ -23,7 +23,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        print("map view loaded")
         
         ParseClient.sharedInstance().getStudentLocation() { (success, error) in
             performUIUpdatesOnMain {

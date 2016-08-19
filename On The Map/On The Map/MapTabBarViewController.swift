@@ -8,10 +8,10 @@
 
 import UIKit
 
+
 class MapTabBarViewController: UITabBarController {
     
-    
-    
+
     
     @IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
         if viewControllers![selectedIndex].isKindOfClass(MapViewController) {
