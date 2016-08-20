@@ -17,11 +17,14 @@ class ParseClient {
     func taskForGetMethod(method: String, parameters: [String:AnyObject], completionHandlerForGET: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
         
         /* 1. Set the parameters */
-        var parameterWithLimit = parameters
-        parameterWithLimit[Constants.ParameterKeys.Limit] = Constants.Limit
+        var allParameters = parameters
+        allParameters = [Constants.ParameterKeys.Limit: Constants.Limit,
+                        Constants.ParameterKeys.Order: Constants.ParameterValues.Order
+                        ]
+        
         
         /* 2/3. Build the URL, Configure the request */
-        let request = NSMutableURLRequest(URL: parseURLFromParameters(parameterWithLimit, withPathExtension: method))
+        let request = NSMutableURLRequest(URL: parseURLFromParameters(allParameters, withPathExtension: method))
         request.addValue(Constants.ParseAPI.parseAPPID, forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue(Constants.ParseAPI.restAPIKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
         
@@ -65,6 +68,7 @@ class ParseClient {
     }
     
     func taskForPOSTMethod(method: String, parameters: [String:AnyObject]?, jsonBody: String?, methodType: String?, completionHandlerForPOST: (result: AnyObject!, error: NSError?) -> Void) -> NSURLSessionDataTask {
+        
         
         // build the url and configure the request
         var URL = NSURL()

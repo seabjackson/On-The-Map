@@ -22,21 +22,13 @@ extension ParseClient {
                     return
                 }
                 // clear out any previous location objects
-                sharedLocations.removeAll()
+                StudentLocations.sharedInstance.sharedLocations.removeAll()
                 // loop through all the student locations
-                for location in locations {
-                    var studentLocation = StudentLocation()
-                    studentLocation.firstName = location["firstName"] as? String
-                    studentLocation.lastName = location["lastName"] as? String
-                    studentLocation.latitude = location["latitude"] as? Double
-                    studentLocation.longitude = location["longitude"] as? Double
-                    studentLocation.mapString = location["mapString"] as? String
-                    studentLocation.mediaURL = location["mediaURL"] as? String
-                    studentLocation.objectId = location["objectId"] as? String
-                    studentLocation.uniqueKey = location["uniqueKey"] as? String
+                for dictionary in locations {
+                    let studentLocation = StudentLocation(dictionary: dictionary)
                     
                     // load up the student location array
-                    sharedLocations.append(studentLocation)
+                    StudentLocations.sharedInstance.sharedLocations.append(studentLocation)
                 }
                 completionHandlerForStudentLocation(success: true, error: nil)
                 

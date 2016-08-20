@@ -33,6 +33,11 @@ extension ParseClient {
         struct ParameterKeys {
             static let Limit = "limit"
             static let MethodType = "POST"
+            static let Order = "order"
+        }
+        
+        struct ParameterValues {
+            static let Order = "-updatedAt"
         }
         
         // MARL: Methods

@@ -25,13 +25,13 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sharedLocations.count
+        return StudentLocations.sharedInstance.sharedLocations.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
-        if let firstName = sharedLocations[indexPath.row].firstName,lastName = sharedLocations[indexPath.row].lastName {
+        if let firstName = StudentLocations.sharedInstance.sharedLocations[indexPath.row].firstName,lastName = StudentLocations.sharedInstance.sharedLocations[indexPath.row].lastName {
             cell.textLabel?.text = "\(firstName) \(lastName)"
             cell.imageView!.image = UIImage(named: "pin")
         }
@@ -40,8 +40,10 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let app = UIApplication.sharedApplication()
-        if let url = NSURL(string: sharedLocations[indexPath.row].mediaURL!) {
+        if let url = NSURL(string: StudentLocations.sharedInstance.sharedLocations[indexPath.row].mediaURL!) {
             app.openURL(url)
+        } else {
+            showAlert("Invalid Link", withMessage: "")
         }
         
     }
@@ -50,12 +52,20 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func didRefreshTable() {
         ParseClient.sharedInstance().getStudentLocation() { (success, error) in
             performUIUpdatesOnMain() {
-                if let error = error {
-                    print("An error occured \(error)")
+                if error != nil {
+                    self.showAlert("Fetching Error", withMessage: "error retrieving location")
                 }
-                print("refreshed the table")
                 self.tableView.reloadData()
             }
         }
     }
+    
+    
+    func  showAlert(title: String, withMessage message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alert.addAction(action)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
 }

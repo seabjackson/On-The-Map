@@ -64,7 +64,7 @@ class PostingViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
                 self.linkTextField.hidden = false
                 
                 if placemarks?.count > 0 {
-                    var placemark = placemarks?[0]
+                    let placemark = placemarks?[0]
                     let location = placemark?.location
                     let coordinate = location?.coordinate
                     guard let latitude = coordinate?.latitude else {
@@ -86,20 +86,16 @@ class PostingViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
                     self.mapView.addAnnotations(self.annotations)
              
                     self.mapView.addAnnotation(MKPlacemark(placemark: placemark!))
-                    placemark = MKPlacemark(placemark: placemark!)
+                   // placemark = MKPlacemark(placemark: placemark!)
                     
                     // center the map
                     let p = MKPlacemark(placemark: placemark!)
-                    let span = MKCoordinateSpanMake(8, 8)
+                    let span = MKCoordinateSpanMake(3, 3)
                     let region = MKCoordinateRegion(center: p.location!.coordinate, span: span)
                     self.mapView.setRegion(region, animated: true)
-                        
                     
                     self.activityIndicator.stopAnimating()
                     self.activityIndicator.hidden = true
-                    
-            
-                    
                 }
             }
         }

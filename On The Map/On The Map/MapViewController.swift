@@ -26,12 +26,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         ParseClient.sharedInstance().getStudentLocation() { (success, error) in
             performUIUpdatesOnMain {
-                if let error = error {
-                    print("An error occurred \(error)")
+                if error != nil {
+                    self.showAlert("Locations Not Found", withMessage: "download failed")
                 }
                 
                 if success {
-                    print("got the locations yeahh")
                     self.showAnnotationOnMap()
                 }
             }
@@ -64,6 +63,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 // safely open the url
                 if let urlString = NSURL(string: toOpen) {
                     app.openURL(urlString)
+                } else {
+                    showAlert("Invalid Link", withMessage: "")
                 }
             }
         }
@@ -73,11 +74,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         ParseClient.sharedInstance().getStudentLocation() { (success, error) in
             performUIUpdatesOnMain() {
                 if (error != nil) {
-                    print("error in getting results")
+                    self.showAlert("Unsucessful Refresh", withMessage: "")
                 }
                 
                 if success {
-                    print("remove annotation")
                     self.mapView.removeAnnotations(self.annotations)
                     self.annotations.removeAll()
                     self.showAnnotationOnMap()
@@ -87,13 +87,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     func showAnnotationOnMap() {
-        for dictionary in sharedLocations {
+        for dictionary in StudentLocations.sharedInstance.sharedLocations {
             guard let lat = dictionary.latitude else {
-                print("no lat")
                 break
             }
             guard let long = dictionary.longitude else {
-                print("no long")
                 break
             }
             let latitude = CLLocationDegrees(lat)
@@ -117,16 +115,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    func  showAlert(title: String, withMessage message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        let action = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alert.addAction(action)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
     
 }

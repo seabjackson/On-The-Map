@@ -28,8 +28,7 @@ class MapTabBarViewController: UITabBarController {
         UdacityClient.sharedInstance().deleteSessionID() {(success, error) in
             if success {
                 performUIUpdatesOnMain() {
-                    let controller = (self.storyboard?.instantiateViewControllerWithIdentifier("LoginScreen"))! as UIViewController
-                    self.presentViewController(controller, animated: true, completion: nil)
+                    self.dismissViewControllerAnimated(true, completion: nil)
                 }
             }
         }
