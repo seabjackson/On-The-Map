@@ -30,7 +30,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         UdacityClient.sharedInstance().getSessionID(usernameTextField.text!, password: passWordTextField.text!) { (success, sessionID, errorString) in
             performUIUpdatesOnMain {
                 if success {
-                    self.usernameTextField.text = ""
+                    // leave email to facilitate sign in by the same user
                     self.passWordTextField.text = ""
                     let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MainNavigation") as! UINavigationController
                     self.presentViewController(controller, animated: true, completion: nil)
