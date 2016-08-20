@@ -90,7 +90,7 @@ class PostingViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
                     
                     // center the map
                     let p = MKPlacemark(placemark: placemark!)
-                    let span = MKCoordinateSpanMake(3, 3)
+                    let span = MKCoordinateSpanMake(0.1, 0.1)
                     let region = MKCoordinateRegion(center: p.location!.coordinate, span: span)
                     self.mapView.setRegion(region, animated: true)
                     
