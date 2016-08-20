@@ -19,6 +19,7 @@ class PostingViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var linkTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     
     
@@ -28,12 +29,14 @@ class PostingViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        mapView.userInteractionEnabled = false
         mapView.hidden = true
         linkTextField.hidden = true
         locationLabel.hidden = false
         [linkTextField, textField].forEach() {
             $0.delegate = self
         }
+        activityIndicator.hidden = true
     }
     
     @IBOutlet weak var cancel: UIButton!
@@ -44,6 +47,8 @@ class PostingViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
     
     @IBAction func findOnMap(sender: UIButton) {
         if let location = textField.text {
+            activityIndicator.hidden = false
+            activityIndicator.startAnimating()
             CLGeocoder().geocodeAddressString(location) { (placemarks, error) in
                 if error != nil {
                     self.showAlert("No Results Found", withMessage: "unable to find location")
@@ -59,7 +64,7 @@ class PostingViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
                 self.linkTextField.hidden = false
                 
                 if placemarks?.count > 0 {
-                    let placemark = placemarks?[0]
+                    var placemark = placemarks?[0]
                     let location = placemark?.location
                     let coordinate = location?.coordinate
                     guard let latitude = coordinate?.latitude else {
@@ -79,6 +84,21 @@ class PostingViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
                     annotation.coordinate  = coordinate!
                     self.annotations.append(annotation)
                     self.mapView.addAnnotations(self.annotations)
+             
+                    self.mapView.addAnnotation(MKPlacemark(placemark: placemark!))
+                    placemark = MKPlacemark(placemark: placemark!)
+                    
+                    // center the map
+                    let p = MKPlacemark(placemark: placemark!)
+                    let span = MKCoordinateSpanMake(8, 8)
+                    let region = MKCoordinateRegion(center: p.location!.coordinate, span: span)
+                    self.mapView.setRegion(region, animated: true)
+                        
+                    
+                    self.activityIndicator.stopAnimating()
+                    self.activityIndicator.hidden = true
+                    
+            
                     
                 }
             }

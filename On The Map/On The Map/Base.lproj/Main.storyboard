@@ -268,7 +268,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="p0o-3G-jt1">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="p0o-3G-jt1">
                                 <rect key="frame" x="0.0" y="161" width="600" height="439"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ge-8B-wya">
@@ -355,6 +355,13 @@
                                     <action selector="cancel:" destination="YIA-ma-xE5" eventType="touchUpInside" id="7dq-Vw-RPq"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="06i-Rm-Ipz">
+                                <rect key="frame" x="290" y="139" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="2Uv-Go-D2O"/>
+                                    <constraint firstAttribute="height" constant="20" id="oU5-6H-6Ip"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.015686274510000001" green="0.66274509800000003" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -368,6 +375,8 @@
                             <constraint firstAttribute="trailingMargin" secondItem="6CW-jD-WcN" secondAttribute="trailing" constant="150" id="DJe-OW-IIy"/>
                             <constraint firstItem="of6-UZ-Ity" firstAttribute="trailing" secondItem="gXE-Mx-AB8" secondAttribute="trailingMargin" id="HW4-hC-5YH"/>
                             <constraint firstItem="6CW-jD-WcN" firstAttribute="top" secondItem="0Yd-o1-jFc" secondAttribute="bottom" constant="8" symbolic="YES" id="JFz-UI-zsq"/>
+                            <constraint firstItem="06i-Rm-Ipz" firstAttribute="top" secondItem="6CW-jD-WcN" secondAttribute="bottom" constant="1" id="Mo5-Dm-UqQ"/>
+                            <constraint firstItem="06i-Rm-Ipz" firstAttribute="centerX" secondItem="gXE-Mx-AB8" secondAttribute="centerX" id="NKE-NX-F4F"/>
                             <constraint firstItem="p0o-3G-jt1" firstAttribute="top" secondItem="yFr-xa-4oh" secondAttribute="bottom" constant="141" id="S2F-gY-Qdf"/>
                             <constraint firstItem="3Ge-8B-wya" firstAttribute="top" secondItem="F6w-xc-BCC" secondAttribute="bottom" constant="57" id="TCD-Jt-jiT"/>
                             <constraint firstItem="Ypc-Gr-kDl" firstAttribute="top" secondItem="p0o-3G-jt1" secondAttribute="bottom" constant="-165" id="Thm-gz-jZ9"/>
@@ -382,6 +391,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="p0o-3G-jt1" secondAttribute="trailing" constant="-20" id="lAD-Kr-QIB"/>
                             <constraint firstItem="3Ge-8B-wya" firstAttribute="centerX" secondItem="gXE-Mx-AB8" secondAttribute="centerX" id="mzL-Us-vgB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="F6w-xc-BCC" secondAttribute="trailing" constant="-20" id="qPY-vQ-DQ4"/>
+                            <constraint firstItem="p0o-3G-jt1" firstAttribute="top" secondItem="06i-Rm-Ipz" secondAttribute="bottom" constant="2" id="vYU-5I-RVa"/>
                             <constraint firstItem="p0o-3G-jt1" firstAttribute="top" secondItem="6CW-jD-WcN" secondAttribute="bottom" constant="23" id="wJX-fh-DR1"/>
                             <constraint firstItem="6CW-jD-WcN" firstAttribute="centerX" secondItem="gXE-Mx-AB8" secondAttribute="centerX" id="zOA-7L-gwb"/>
                         </constraints>
@@ -399,6 +409,7 @@
                     </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="06i-Rm-Ipz" id="LM7-AF-HJo"/>
                         <outlet property="findButton" destination="3Ge-8B-wya" id="AKq-7O-rKl"/>
                         <outlet property="linkTextField" destination="0Yd-o1-jFc" id="QU0-ZX-NWU"/>
                         <outlet property="locationLabel" destination="6CW-jD-WcN" id="S0o-0N-EwY"/>
