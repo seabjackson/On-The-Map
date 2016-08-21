@@ -51,6 +51,8 @@ class PostingViewController: UIViewController, MKMapViewDelegate, UITextFieldDel
             activityIndicator.startAnimating()
             CLGeocoder().geocodeAddressString(location) { (placemarks, error) in
                 if error != nil {
+                    // hide activity indicator if there is an error
+                    self.activityIndicator.hidden = true
                     self.showAlert("No Results Found", withMessage: "unable to find location")
                     return
                 }
